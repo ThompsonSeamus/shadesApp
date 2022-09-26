@@ -2,6 +2,7 @@ package com.example.shadesapp;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,11 @@ import java.util.List;
  */
 public class ShadeRecyclerViewAdapter extends RecyclerView.Adapter<ShadeRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
-
-    public ShadeRecyclerViewAdapter(List<PlaceholderItem> items) {
+    private final List<Shade> mValues;
+    private Context context;
+    public ShadeRecyclerViewAdapter(List<Shade> items, Context context)
+    {
+        this.context = context;
         mValues = items;
     }
 
@@ -33,9 +36,14 @@ public class ShadeRecyclerViewAdapter extends RecyclerView.Adapter<ShadeRecycler
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.shade = mValues.get(position);
+        holder.shadeNameView.setText(holder.shade.getName());
+        holder.shadeNameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -44,19 +52,12 @@ public class ShadeRecyclerViewAdapter extends RecyclerView.Adapter<ShadeRecycler
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public final TextView shadeNameView;
+        public Shade shade;
 
         public ViewHolder(FragmentShadeBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            shadeNameView = binding.shadeNameTextView;
         }
     }
 }

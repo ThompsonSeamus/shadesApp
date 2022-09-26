@@ -2,7 +2,7 @@ package com.example.shadesapp;
 
 public class ShadesDB {
 
-    public final String[] shades = {
+    public static final String[] shades = {
             "Red",
             "Orange",
             "Yellow",
@@ -14,7 +14,7 @@ public class ShadesDB {
             "Violet"
     };
 
-    public final String[] descriptions = {
+    public static final String[] descriptions = {
             "Red like blood",
             "Orange like an orange",
             "Yellow like a highlighter",

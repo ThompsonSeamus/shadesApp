@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.shadesapp.placeholder.PlaceholderContent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -64,8 +68,24 @@ public class ShadeListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new ShadeRecyclerViewAdapter(PlaceholderContent.ITEMS));
+            recyclerView.setAdapter(new ShadeRecyclerViewAdapter(getShadesFromDB(), context));
+            recyclerView.setHasFixedSize(true);
+            RecyclerView.ItemDecoration decoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+            recyclerView.addItemDecoration(decoration);
         }
         return view;
+    }
+
+    private List<Shade> getShadesFromDB() {
+        List<Shade> shadeList = new ArrayList<>();
+        for(int i = 0; i < ShadesDB.shades.length; i++){
+            shadeList.add(new Shade(ShadesDB.shades[i], ShadesDB.descriptions[i]));
+        }
+        return shadeList;
+    }
+
+
+    public interface ShadeSelectedListener{
+        public void onShadeSelected(Shade shade);
     }
 }
