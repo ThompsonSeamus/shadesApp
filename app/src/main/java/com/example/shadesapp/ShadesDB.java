@@ -1,5 +1,7 @@
 package com.example.shadesapp;
 
+import androidx.annotation.ColorInt;
+
 public class ShadesDB {
 
     public static final String[] shades = {
@@ -25,4 +27,16 @@ public class ShadesDB {
             "Indigo like blue but darker",
             "Violet like the flower"
     };
+
+    public static final int[] hexes = {
+            R.color.red,
+            R.color.orange,
+            R.color.yellow,
+            R.color.gold,
+            R.color.green,
+            R.color.light_blue,
+            R.color.blue,
+            R.color.indigo,
+            R.color.violet,
+    }
 }

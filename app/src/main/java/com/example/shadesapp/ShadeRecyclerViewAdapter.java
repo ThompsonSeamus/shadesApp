@@ -21,10 +21,13 @@ public class ShadeRecyclerViewAdapter extends RecyclerView.Adapter<ShadeRecycler
 
     private final List<Shade> mValues;
     private Context context;
+    private ShadeListFragment.ShadeSelectedListener listener;
+
     public ShadeRecyclerViewAdapter(List<Shade> items, Context context)
     {
         this.context = context;
         mValues = items;
+        listener = (MainActivity)context;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class ShadeRecyclerViewAdapter extends RecyclerView.Adapter<ShadeRecycler
         holder.shadeNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                listener.onShadeSelected(holder.shade);
             }
         });
     }
