@@ -11,9 +11,9 @@
     <color name = "orange">#ff8519</color>
     <color name = "yellow">#ffff00</color>
     <color name = "gold">#f7dd2f</color>
-    <color name = "green">#</color>
-    <color name = "light_blue">#</color>
-    <color name = "blue">#</color>
-    <color name = "indigo">#</color>
-    <color name = "violet">#</color>
+    <color name = "green">#09ff00</color>
+    <color name = "light_blue">#00fff7</color>
+    <color name = "blue">#002aff</color>
+    <color name = "indigo">#6d2eff</color>
+    <color name = "violet">#a200ff</color>
 </resources>

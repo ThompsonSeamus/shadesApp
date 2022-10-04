@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -60,12 +61,14 @@ public class ShadeDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shade_detail, container, false);
         TextView detail = view.findViewById(R.id.description_text);
         detail.setText(description);
+        Button button = view.findViewById(R.id.back_button);
+        if(button != null) button.setOnClickListener(this::goBack);
         return view;
     }
 
     public void goBack(View view){
-        FragmentManager manager = getParentFragmentManager();
+        FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragment_container, new ShadeListFragment());
+        transaction.replace(R.id.landscape_layout, new ShadeListFragment()).commit();
     }
 }

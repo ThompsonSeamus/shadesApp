@@ -38,5 +38,5 @@ public class ShadesDB {
             R.color.blue,
             R.color.indigo,
             R.color.violet,
-    }
+    };
 }

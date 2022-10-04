@@ -79,7 +79,7 @@ public class ShadeListFragment extends Fragment {
     private List<Shade> getShadesFromDB() {
         List<Shade> shadeList = new ArrayList<>();
         for(int i = 0; i < ShadesDB.shades.length; i++){
-            shadeList.add(new Shade(ShadesDB.shades[i], ShadesDB.descriptions[i]));
+            shadeList.add(new Shade(ShadesDB.shades[i], ShadesDB.descriptions[i], ShadesDB.hexes[i]));
         }
         return shadeList;
     }
