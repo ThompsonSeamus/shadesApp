@@ -22,9 +22,11 @@ public class ShadeDetailFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "description";
+    private static final String ARG_PARAM2 = "color_id";
 
     // TODO: Rename and change types of parameters
     private String description;
+    private int colorID;
 
     public ShadeDetailFragment() {
         // Required empty public constructor
@@ -38,10 +40,11 @@ public class ShadeDetailFragment extends Fragment {
      * @return A new instance of fragment ShadeDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShadeDetailFragment newInstance(String param1) {
+    public static ShadeDetailFragment newInstance(String param1, int param2) {
         ShadeDetailFragment fragment = new ShadeDetailFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,6 +54,7 @@ public class ShadeDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             description = getArguments().getString(ARG_PARAM1);
+            colorID = getArguments().getInt(ARG_PARAM2);
         }
     }
 
@@ -59,16 +63,22 @@ public class ShadeDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shade_detail, container, false);
+        int color = colorID != 0 ? requireActivity().getColor(colorID) : requireActivity().getColor(R.color.white);
+
         TextView detail = view.findViewById(R.id.description_text);
         detail.setText(description);
+        detail.setBackgroundColor(color);
         Button button = view.findViewById(R.id.back_button);
-        if(button != null) button.setOnClickListener(this::goBack);
+        if(button != null){
+            button.setOnClickListener(this::goBack);
+            button.setBackgroundColor(color);
+        }
         return view;
     }
 
     public void goBack(View view){
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.landscape_layout, new ShadeListFragment()).commit();
+        transaction.replace(R.id.portrait_container, new ShadeListFragment()).commit();
     }
 }

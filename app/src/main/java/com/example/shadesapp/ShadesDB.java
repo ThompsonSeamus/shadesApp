@@ -21,7 +21,7 @@ public class ShadesDB {
             "Orange like an orange",
             "Yellow like a highlighter",
             "Gold like Jose's watch",
-            "Green like  grass",
+            "Green like grass (go touch some)",
             "Light Blue like blue but brighter",
             "Blue like the berry",
             "Indigo like blue but darker",
