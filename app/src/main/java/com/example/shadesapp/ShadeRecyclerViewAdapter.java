@@ -41,6 +41,8 @@ public class ShadeRecyclerViewAdapter extends RecyclerView.Adapter<ShadeRecycler
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.shade = mValues.get(position);
         holder.shadeNameView.setText(holder.shade.getName());
+        if(holder.shade.getColorID() == R.color.yellow){holder.shadeNameView.setTextColor(context.getColor(R.color.black));}
+        else{holder.shadeNameView.setTextColor(context.getColor(R.color.white));}
         holder.shadeNameView.setOnClickListener(v -> listener.onShadeSelected(holder.shade));
         holder.shadeNameView.setBackgroundColor(context.getColor(holder.shade.getColorID()));
     }

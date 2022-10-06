@@ -63,11 +63,13 @@ public class ShadeDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shade_detail, container, false);
-        int color = colorID != 0 ? requireActivity().getColor(colorID) : requireActivity().getColor(R.color.white);
+        int color = colorID != 0 ? requireActivity().getColor(colorID) : requireActivity().getColor(R.color.black);
 
         TextView detail = view.findViewById(R.id.description_text);
         detail.setText(description);
         detail.setBackgroundColor(color);
+        if(colorID == R.color.yellow) detail.setTextColor(requireActivity().getColor(R.color.black));
+        else{detail.setTextColor(requireActivity().getColor(R.color.white));}
         Button button = view.findViewById(R.id.back_button);
         if(button != null){
             button.setOnClickListener(this::goBack);
