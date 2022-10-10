@@ -13,8 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.shadesapp.placeholder.PlaceholderContent;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +70,7 @@ public class ShadeListFragment extends Fragment {
             recyclerView.setHasFixedSize(true);
             RecyclerView.ItemDecoration decoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
             recyclerView.addItemDecoration(decoration);
+            recyclerView.scrollToPosition(((MainActivity)context).getSelectedPosition());
         }
         return view;
     }
@@ -86,6 +85,6 @@ public class ShadeListFragment extends Fragment {
 
 
     public interface ShadeSelectedListener{
-        public void onShadeSelected(Shade shade);
+        public void onShadeSelected(Shade shade, int position);
     }
 }

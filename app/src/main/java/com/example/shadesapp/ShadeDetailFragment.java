@@ -27,6 +27,7 @@ public class ShadeDetailFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String description;
     private int colorID;
+    private Shade selectedShade;
 
     public ShadeDetailFragment() {
         // Required empty public constructor
@@ -56,6 +57,7 @@ public class ShadeDetailFragment extends Fragment {
             description = getArguments().getString(ARG_PARAM1);
             colorID = getArguments().getInt(ARG_PARAM2);
         }
+        selectedShade = ((MainActivity) requireActivity()).getSelectedShade();
     }
 
     @Override
@@ -63,12 +65,21 @@ public class ShadeDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shade_detail, container, false);
-        int color = colorID != 0 ? requireActivity().getColor(colorID) : requireActivity().getColor(R.color.black);
+        //int color = colorID != 0 ? requireActivity().getColor(colorID) : requireActivity().getColor(R.color.black);
+
+        int color = requireActivity().getColor(selectedShade.getColorID());
 
         TextView detail = view.findViewById(R.id.description_text);
-        detail.setText(description);
+        detail.setText(selectedShade.getDescription());
         detail.setBackgroundColor(color);
-        if(colorID == R.color.yellow) detail.setTextColor(requireActivity().getColor(R.color.black));
+        if(((selectedShade.getColorID() == R.color.yellow ||
+                selectedShade.getColorID() == R.color.light_blue) ||
+               (selectedShade.getColorID() == R.color.green ||
+                selectedShade.getColorID() == R.color.gold)) ||
+               (selectedShade.getColorID() == R.color.white ||
+                selectedShade.getColorID() == R.color.chartreuse)){
+            detail.setTextColor(requireActivity().getColor(R.color.black));
+        }
         else{detail.setTextColor(requireActivity().getColor(R.color.white));}
         Button button = view.findViewById(R.id.back_button);
         if(button != null){

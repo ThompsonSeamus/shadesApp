@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements ShadeListFragment
 
     private static final String SHARED_PREFS = "shared_prefs";
     private static final String SELECTED_SHADE = "selected_shade";
+    private static final String SELECTED_POS = "selected_position";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +24,9 @@ public class MainActivity extends AppCompatActivity implements ShadeListFragment
     }
 
     @Override
-    public void onShadeSelected(Shade shade) {
+    public void onShadeSelected(Shade shade, int position) {
 
-        saveSelectedShade(shade);
+        saveSelectedShade(shade, position);
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -38,19 +39,25 @@ public class MainActivity extends AppCompatActivity implements ShadeListFragment
         Toast.makeText(this, shade.getName() + " Selected", Toast.LENGTH_SHORT).show();
     }
 
-    private void saveSelectedShade(Shade shade) {
+    private void saveSelectedShade(Shade shade, int position) {
         Gson gson = new Gson();
         String selectedShadeJSON = gson.toJson(shade);
         SharedPreferences preferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(SELECTED_POS, position);
         editor.putString(SELECTED_SHADE, selectedShadeJSON).apply();
     }
 
-    private Shade getSelectedShade(){
+    public Shade getSelectedShade(){
         Gson gson = new Gson();
         SharedPreferences preferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         String selectedShadeJSON = preferences.getString(SELECTED_SHADE, "");
         if(selectedShadeJSON.equals("")) return new Shade(ShadesDB.shades[0], ShadesDB.descriptions[0], ShadesDB.hexes[0]);
         return gson.fromJson(selectedShadeJSON, Shade.class);
+    }
+
+    public int getSelectedPosition(){
+        SharedPreferences preferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        return preferences.getInt(SELECTED_POS, 0);
     }
 }
